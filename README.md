@@ -10,7 +10,7 @@ Everything here is reverse engineered.
 git clone https://github.com/Something-Went-Wrong-ORG/unofficial-vk-play-live-api.git YOURFOLDERNAME
 cd YOURFOLDERNAME
 
-# Run npm install and write your library name when asked. That's all!
+# Run npm install. That's all!
 npm install
 ```
 
