@@ -1,20 +1,20 @@
 {
-  "name": "--libraryname--",
+  "name": "unofficial-vk-play-live-api",
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  "main": "dist/--libraryname--.umd.js",
-  "module": "dist/--libraryname--.es5.js",
-  "typings": "dist/types/--libraryname--.d.ts",
+  "main": "dist/unofficial-vk-play-live-api.umd.js",
+  "module": "dist/unofficial-vk-play-live-api.es5.js",
+  "typings": "dist/types/unofficial-vk-play-live-api.d.ts",
   "files": [
     "dist"
   ],
-  "author": "--username-- <--usermail-->",
+  "author": "Mykhailo Shcherbyna <profiler4100v2@gmail.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Something-Went-Wrong-ORG/unofficial-vk-play-live-api.git"
   },
-  "license": "MIT",
+  "license": "GNU AFFERO GENERAL PUBLIC LICENSE v3",
   "engines": {
     "node": ">=6.0.0"
   },
@@ -32,7 +32,6 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "postinstall": "ts-node tools/init",
     "travis-deploy-once": "travis-deploy-once"
   },
   "lint-staged": {
@@ -57,6 +56,9 @@
       "tsx",
       "js"
     ],
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    },
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/test/"
@@ -115,7 +117,11 @@
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-standard": "^8.0.1",
-    "typedoc": "^0.12.0",
-    "typescript": "^3.0.3"
+    "typedoc": "^0.16.0",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "@reactivex/rxjs": "^6.6.7",
+    "axios": "0.21.2"
   }
 }
