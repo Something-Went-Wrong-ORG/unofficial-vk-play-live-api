@@ -3,10 +3,10 @@
 // ...
 // export * from './modules/stream/stream';
 
-import { StreamLogger } from './modules/stream/stream'
+import { StreamManager } from './modules/stream/stream';
 
 export default class VKPLAPI {
-  public static GetStreamLogger(username: string) {
-    return new StreamLogger(username)
+  public static GetStreamManager(username: string) {
+    return new StreamManager(username);
   }
 }

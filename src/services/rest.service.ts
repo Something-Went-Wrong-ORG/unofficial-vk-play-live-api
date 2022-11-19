@@ -1,11 +1,11 @@
-import axios from 'axios'
-import { LIVE_SERVER_API_URL } from '../constants/servers.const'
-import { Metadata } from '../modules/stream/stream'
+import axios from 'axios';
+import { LIVE_SERVER_API_URL } from '../constants/servers.const';
+import { Metadata } from '../modules/stream/stream';
 
 export const GetMetadata = async (username: string, metadata?: Metadata): Promise<Metadata> => {
   return new Promise<Metadata>((resolve, reject) => {
     if (metadata) {
-      resolve(metadata)
+      resolve(metadata);
     }
 
     axios
@@ -13,6 +13,6 @@ export const GetMetadata = async (username: string, metadata?: Metadata): Promis
       .then(
         v => resolve(v.data),
         e => reject(e)
-      )
-  })
-}
+      );
+  });
+};
