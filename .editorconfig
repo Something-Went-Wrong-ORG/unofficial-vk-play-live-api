@@ -11,3 +11,6 @@ indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
+
+[*.ts]
+ij_typescript_force_semicolon_style = true
