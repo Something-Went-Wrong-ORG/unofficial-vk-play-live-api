@@ -1,0 +1,14 @@
+name: test-and-build
+run-name: Autotest and build performed by ${{ github.actor }}
+on: [push]
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npm run test:prod
+      - run: npm run build
