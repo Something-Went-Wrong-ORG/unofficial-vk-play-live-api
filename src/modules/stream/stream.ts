@@ -1,5 +1,6 @@
 import { GetMetadata } from '../../services/rest.service';
 import { timeout } from '../../utils/async.utils';
+import { from, Subscription } from '@reactivex/rxjs/dist/typings';
 
 export interface PlayerType {
   low: 'low';
@@ -91,12 +92,14 @@ export class StreamManager {
   private readonly username: string = '';
   private serviceStarted: boolean = false;
   private metadata?: Metadata = undefined; // https://api.vkplay.live/v1/blog/<username>/public_video_stream?from=layer
+  private subscription: Subscription;
 
   public constructor(username: string, immediateStart: boolean = true) {
     this.username = username;
+    this.subscription = new Subscription();
 
     if (immediateStart) {
-      this.start();
+      this.subscription.add(from(this.start()).subscribe());
     }
   }
 
@@ -106,7 +109,9 @@ export class StreamManager {
     console.log(this.metadata);
   }
 
-  public stop() {}
+  public stop() {
+    this.subscription.unsubscribe();
+  }
 
   public async ReloadMetadata() {
     this.metadata = await GetMetadata(this.username);
