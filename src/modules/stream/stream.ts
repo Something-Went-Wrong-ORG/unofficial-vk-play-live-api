@@ -1,6 +1,6 @@
 import { GetMetadata } from '../../services/rest.service';
 import { timeout } from '../../utils/async.utils';
-import { from, Subscription } from '@reactivex/rxjs/dist/typings';
+import { from, Subscription } from '@reactivex/rxjs/dist/package';
 
 export interface PlayerType {
   low: 'low';
