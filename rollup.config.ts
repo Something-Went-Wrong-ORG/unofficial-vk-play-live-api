@@ -9,6 +9,12 @@ const pkg = require('./package.json');
 
 const libraryName = 'unofficial-vk-play-live-api';
 
+const globals = {
+  axios: 'axios',
+  '@reactivex/rxjs': '@reactivex/rxjs',
+  '@reactivex/rxjs/dist/typings': '@reactivex/rxjs/dist/typings'
+};
+
 export default {
   input: `src/${libraryName}.ts`,
   output: [
@@ -17,17 +23,17 @@ export default {
       name: camelCase(libraryName),
       format: 'umd',
       sourcemap: true,
-      globals: { axios: 'axios' }
+      globals
     },
     {
       file: pkg.module,
       format: 'es',
       sourcemap: true,
-      globals: { axios: 'axios' }
+      globals
     }
   ],
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-  external: ['axios'],
+  external: [],
   watch: {
     include: 'src/**'
   },
@@ -39,7 +45,9 @@ export default {
     typescript({ useTsconfigDeclarationDir: true }),
 
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
-    commonjs(),
+    commonjs({
+      include: 'node_modules/**' // ['node_modules/axios/**', 'node_modules/lodash/**', 'node_modules/@reactivex/**']
+    }),
 
     // Allow node_modules resolution, so you can use 'external' to control
     // which external modules to include in the bundle
