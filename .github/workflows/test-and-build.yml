@@ -10,8 +10,8 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
-    needs: prepare
   test:
+    needs: prepare
     runs-on: ubuntu-latest
     steps:
       - run: npm run test:prod
