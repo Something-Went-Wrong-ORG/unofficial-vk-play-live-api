@@ -2,7 +2,7 @@ name: test-and-build
 run-name: Autotest and build performed by ${{ github.actor }}
 on: [push]
 jobs:
-  prepare:
+  prepare_test_build_deploy-pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -10,16 +10,9 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
-  test:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
       - run: npm run test:prod
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
       - run: npm run build
+
   deploy-pages:
     needs: build
 
@@ -34,6 +27,13 @@ jobs:
     # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npm run test:prod
+      - run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
