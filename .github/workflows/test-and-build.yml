@@ -32,7 +32,6 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
-      - run: npm run test:prod
       - run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
