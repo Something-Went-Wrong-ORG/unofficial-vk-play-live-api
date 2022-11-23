@@ -2,7 +2,7 @@ name: test-and-build
 run-name: Autotest and build performed by ${{ github.actor }}
 on: [push]
 jobs:
-  test-and-build:
+  prepare:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -10,7 +10,15 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
+    needs: prepare
+  test:
+    runs-on: ubuntu-latest
+    steps:
       - run: npm run test:prod
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
       - run: npm run build
   deploy-pages:
     needs: build
