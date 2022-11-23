@@ -4,6 +4,9 @@ This library is unofficial API (for https://vkplay.live/) and uses undocumented 
 
 Everything here is reverse engineered.
 
+- If I can do something in browser, then this MUST be available through an API
+- If I can do something anonymously (without account) then I don't need some_sort of API key or another type of access
+
 ### Usage
 
 ```bash
