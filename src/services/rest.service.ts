@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { LIVE_SERVER_API_URL } from '../constants/servers.const';
-import { EmbedMetadata, Metadata } from '../modules/stream/stream';
 import { decode } from 'html-entities';
+import { Metadata } from '../types/metadata.types';
+import { PlayerOptions } from '../types/playeroptions.types';
 
 const USER_AGENTS = [
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 RuxitSynthetic/1.0 v5984752886319290287 t7325514408114621287 ath5ee645e0 altpriv cvcv=2 smf=0',
@@ -36,7 +37,9 @@ export const GetMetadata = async (username: string, metadata?: Metadata): Promis
   );
 };
 
-export const GetEmbedMetadata = async (url: string): Promise<EmbedMetadata> => {
+export const GetPlayerOptions = async (url?: string): Promise<PlayerOptions> => {
+  if (!url) throw new Error('url for getting player options is incorrect');
+
   return axios
     .get<string>(url, {
       headers: {
