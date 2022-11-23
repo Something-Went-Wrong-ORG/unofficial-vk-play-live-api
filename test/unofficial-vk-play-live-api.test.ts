@@ -1,5 +1,14 @@
 import VKPLAPI from '../src/unofficial-vk-play-live-api';
-import { GetMetadata } from '../src/services/rest.service';
+
+// todo: fix and enable check
+// const fieldsAreMatchingWithType = (value: any, fields: string[]) => {
+//   const keysInResponse = Object.keys(value ?? {});
+//   // @ts-ignore
+//   const fieldsInModelAndResponseMatches: boolean = fields.every(keyInModel =>
+//     keysInResponse.includes(keyInModel)
+//   );
+//   return fieldsInModelAndResponseMatches;
+// };
 
 /**
  * Dummy test
@@ -21,8 +30,13 @@ describe('Dummy test', () => {
     const streamManager = VKPLAPI.GetStreamManager('d3l_ru');
 
     const metadata = await streamManager.GetMetadata();
-    const embedMetadata = await streamManager.GetEmbedMetadata();
-
     expect(metadata).not.toBeNull();
+    // todo: fix and enable check
+    // expect(fieldsAreMatchingWithType(metadata, keyof<Metadata>)).toBeTruthy();
+
+    const embedMetadata = await streamManager.GetPlayerOptions();
+    expect(embedMetadata).not.toBeNull();
+    // todo: fix and enable check
+    // expect(fieldsAreMatchingWithType(embedMetadata, PlayerOptions)).toBeTruthy();
   });
 });

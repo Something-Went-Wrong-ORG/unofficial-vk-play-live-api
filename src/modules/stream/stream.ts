@@ -8,7 +8,7 @@ export class StreamManager {
   private readonly username: string = '';
   private serviceStarted: boolean = false;
   private metadata?: Metadata = undefined; // https://api.vkplay.live/v1/blog/<username>/public_video_stream?from=layer
-  private embedMetadata?: PlayerOptions = undefined; // https://ok.ru/videoembed/<videoId>?sig=<vid>&uid=<user_id>&t=<timestamp>&cip=<client_ip>&ua=<user_agent>>&promo=boosty
+  private playerOptions?: PlayerOptions = undefined; // https://ok.ru/videoembed/<videoId>?sig=<vid>&uid=<user_id>&t=<timestamp>&cip=<client_ip>&ua=<user_agent>>&promo=boosty
   private subscription: Subscription;
 
   public constructor(username: string, immediateStart: boolean = true) {
@@ -23,9 +23,7 @@ export class StreamManager {
   public async start() {
     this.serviceStarted = true;
     this.metadata = await GetMetadata(this.username, this.metadata);
-    this.embedMetadata = await GetPlayerOptions(this.metadata?.data?.[0]?.url);
-    console.log(this.metadata);
-    console.log(this.embedMetadata);
+    this.playerOptions = await GetPlayerOptions(this.metadata?.data?.[0]?.url);
   }
 
   public stop() {
@@ -48,10 +46,10 @@ export class StreamManager {
     return null;
   }
 
-  public async GetEmbedMetadata(failCount: number = 10): Promise<PlayerOptions | null> {
+  public async GetPlayerOptions(failCount: number = 10): Promise<PlayerOptions | null> {
     for (let fails = 0; fails < failCount; fails++) {
-      if (this.embedMetadata) {
-        return this.embedMetadata;
+      if (this.playerOptions) {
+        return this.playerOptions;
       }
 
       await timeout(200);
