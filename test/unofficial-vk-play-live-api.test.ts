@@ -21,6 +21,7 @@ describe('Dummy test', () => {
     const streamManager = VKPLAPI.GetStreamManager('d3l_ru');
 
     const metadata = await streamManager.GetMetadata();
+    const embedMetadata = await streamManager.GetEmbedMetadata();
 
     expect(metadata).not.toBeNull();
   });
