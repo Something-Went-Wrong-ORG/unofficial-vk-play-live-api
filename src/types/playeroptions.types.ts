@@ -12,22 +12,55 @@ export interface P2PInfo {
 }
 
 export interface LiveChatInfo {
+  /** Contains websocket endpoint to which browser connects in order to track chat info in real time
+   * @example "wss://vm.mycdn.me/chat"
+   */
   chatUrl: string;
+  /** Contains string that is sent to websocket in order to authenticate user
+   * @example "cid=1234567891234&s=abcdef123456789abcdef123456789abcdef123"
+   */
   login: string;
+  /** Contains timeout after which websocket must be reopened or closed
+   * @example 3000
+   */
   timeout: number;
+  /**
+   * @example true
+   */
   showChatOverVideo: boolean;
 }
 
 export interface LiveStreamInfo {
+  /** Contains seconds after which planned stream starts. If stream is not planned, then 0 will be set as value.
+   * @example 120
+   */
   startsInSec: number;
+  /** Contains seconds after which planned stream ends. If stream is not planned, then 0 will be set as value.
+   * @example 120
+   */
   endsInSec: number;
+  /** Contains start date and time of planned stream. If stream is not planned, then "0" will be set as value.
+   * @example "0"
+   */
   startTime: string;
+  /** Contains end date and time of planned stream. If stream is not planned, then "0" will be set as value.
+   * @example "0"
+   */
   endTime: string;
+  /** Contains seconds of playback time
+   * @example 7200000
+   */
   playbackDuration: number;
+  /** Contains seconds of maximum playback time
+   * @example 7200000
+   */
   maxPlaybackDuration: number;
 }
 
 export interface AutoplayOptions {
+  /** True if player must start playing after load.
+   * @example true
+   */
   autoplayEnabled: boolean;
   timeFromEnabled: boolean;
   noRec: boolean;
