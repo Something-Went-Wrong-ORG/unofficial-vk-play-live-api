@@ -1,13 +1,52 @@
 export interface P2PInfo {
+  /** TODO: Unknown property
+   * @default false
+   */
   isPeerEnabled: boolean;
+
+  /** TODO: Unknown property
+   * @default 0
+   */
   ubsc: number;
+
+  /** TODO: Unknown property
+   * @default 0
+   */
   pbsc: number;
+
+  /** TODO: Unknown property
+   * @default 0
+   */
   mptpc: number;
+
+  /** TODO: Unknown property
+   * @default 0
+   */
   pctmt: number;
+
+  /** TODO: Unknown property
+   * @default 0
+   */
   pbesc: number;
+
+  /** TODO: Unknown property
+   * @default 0
+   */
   prrt: number;
+
+  /** TODO: Unknown property
+   * @default 0
+   */
   srt: number;
+
+  /** TODO: Unknown property
+   * @default 0
+   */
   swrt: number;
+
+  /** TODO: Unknown property
+   * @default 0
+   */
   dctt: number;
 }
 
