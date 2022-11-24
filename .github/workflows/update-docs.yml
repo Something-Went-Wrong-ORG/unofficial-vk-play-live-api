@@ -1,9 +1,11 @@
 name: update-docs
-run-name: Autotest and build performed by ${{ github.actor }}
+run-name: Update of docs by ${{ github.actor }}
 on:
   push:
     branches:
       - master
+
+jobs:
   deploy-pages:
     permissions:
       pages: write
