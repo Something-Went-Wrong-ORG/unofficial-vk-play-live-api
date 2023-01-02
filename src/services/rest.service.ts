@@ -69,10 +69,10 @@ export const GetLastMessages = async (
       }
     })
     .then(response => {
-      const resp = response.data as ChatResponse;
-      const result = {
-        extra: resp?.extra,
-        data: resp?.data?.map(
+      const data = response.data;
+      return {
+        extra: data?.extra,
+        data: data?.data?.map(
           (message: Message): Message => {
             return {
               ...message,
@@ -89,7 +89,5 @@ export const GetLastMessages = async (
           }
         )
       };
-
-      return result;
     });
 };
