@@ -1,8 +1,9 @@
-import { GetPlayerOptions, GetMetadata } from '../../services/rest.service';
+import { GetPlayerOptions, GetMetadata, GetLastMessages } from '../../services/rest.service';
 import { timeout } from '../../utils/async.utils';
 import { from, Subscription } from '@reactivex/rxjs/dist/package';
 import { Metadata } from '../../types/metadata.types';
 import { PlayerOptions } from '../../types/playeroptions.types';
+import { ChatResponse } from '../../types/chat.types';
 
 export class StreamManager {
   private readonly username: string = '';
@@ -56,5 +57,9 @@ export class StreamManager {
     }
 
     return null;
+  }
+
+  public async GetLastMessages(limit: number = 20): Promise<ChatResponse> {
+    return GetLastMessages(this.username, limit);
   }
 }

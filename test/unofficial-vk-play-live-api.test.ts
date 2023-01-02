@@ -14,7 +14,7 @@ import VKPLAPI from '../src/unofficial-vk-play-live-api';
  * Dummy test
  */
 describe('Dummy test', () => {
-  const streamManager = VKPLAPI.GetStreamManager('d3l_ru');
+  const streamManager = VKPLAPI.GetStreamManager('browjey');
 
   it('Root class is instantiable', () => {
     expect(new VKPLAPI()).toBeInstanceOf(VKPLAPI);
@@ -29,6 +29,13 @@ describe('Dummy test', () => {
 
   it('PlayerOptions must come from server', async () => {
     const playerOptions = await streamManager.GetPlayerOptions();
+    expect(playerOptions).not.toBeNull();
+    // todo: fix and enable check
+    // expect(fieldsAreMatchingWithType(playerOptions, PlayerOptions)).toBeTruthy();
+  });
+
+  it('Chat messages must come from server', async () => {
+    const playerOptions = await streamManager.GetLastMessages();
     expect(playerOptions).not.toBeNull();
     // todo: fix and enable check
     // expect(fieldsAreMatchingWithType(playerOptions, PlayerOptions)).toBeTruthy();
