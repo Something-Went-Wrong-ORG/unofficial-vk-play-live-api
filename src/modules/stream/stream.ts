@@ -4,6 +4,7 @@ import { from, Subscription } from '@reactivex/rxjs/dist/package';
 import { Metadata } from '../../types/metadata.types';
 import { PlayerOptions } from '../../types/playeroptions.types';
 import { ChatResponse } from '../../types/chat.types';
+import { OpenWebsocketConnection } from '../../services/websocket.service';
 
 export class StreamManager {
   private readonly username: string = '';
@@ -61,5 +62,9 @@ export class StreamManager {
 
   public async GetLastMessages(limit: number = 20): Promise<ChatResponse> {
     return GetLastMessages(this.username, limit);
+  }
+
+  public async OpenWebSocketConnection(): Promise<WebSocket> {
+    return OpenWebsocketConnection(this.username);
   }
 }
