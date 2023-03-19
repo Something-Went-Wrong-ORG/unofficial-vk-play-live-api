@@ -51,7 +51,7 @@ export const GetAppConfig = (username: string): Promise<AppConfig> => {
     })
     .then(response => {
       const regexp = /<script type="text\/plain" id="app-config">(.*)<\/script>/gm;
-      return JSON.parse(decode(regexp.exec(response.data)?.[1] ?? '{}'));
+      return response.data.config ?? JSON.parse(decode(regexp.exec(response.data)?.[1] ?? '{}'));
     });
 };
 
