@@ -1,11 +1,12 @@
 import { GetAppConfig } from './rest.service';
+import { LIVE_SERVER_HOME_HOST } from '../constants/servers.const';
 const WebSocket = require('ws');
 
 export const OpenWebsocketConnection = async (username: string): Promise<WebSocket> => {
   return GetAppConfig(username).then(response => {
     const websocket = new WebSocket(response.hosts.websocket, [], {
       headers: {
-        Origin: 'https://vkplay.live'
+        Origin: LIVE_SERVER_HOME_HOST
       }
     });
     websocket.onopen = () => {
