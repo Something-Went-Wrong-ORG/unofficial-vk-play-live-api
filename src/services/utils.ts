@@ -13,7 +13,7 @@ const USER_AGENTS = [
 
 export const GetRandomUserAgent = () => USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)];
 
-export const GetAdditionalHeaders = () => ({
+export const GetAdditionalHeaders = (username: string) => ({
   'User-Agent': GetRandomUserAgent(),
-  Referer: 'https://vkplay.live/d3l_ru'
+  Referer: `https://vkplay.live/${username}`
 });

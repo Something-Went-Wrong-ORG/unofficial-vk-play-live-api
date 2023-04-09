@@ -25,7 +25,7 @@ export class StreamManager {
   public async start() {
     this.serviceStarted = true;
     this.metadata = await GetMetadata(this.username, this.metadata);
-    this.playerOptions = await GetPlayerOptions(this.metadata?.data?.[0]?.url);
+    this.playerOptions = await GetPlayerOptions(this.username, this.metadata?.data?.[0]?.url);
   }
 
   public stop() {

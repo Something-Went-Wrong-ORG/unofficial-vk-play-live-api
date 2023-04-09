@@ -13,20 +13,26 @@ export const GetMetadata = async (username: string, metadata?: Metadata): Promis
     axios
       .get<Metadata>(`${LIVE_SERVER_API_URL}/blog/${username}/public_video_stream?from=layer`, {
         headers: {
-          ...GetAdditionalHeaders()
+          ...GetAdditionalHeaders(username)
         }
       })
       .then(response => response.data)
   );
 };
 
-export const GetPlayerOptions = async (url?: string): Promise<PlayerOptions> => {
-  if (!url) throw new Error('url for getting player options is incorrect');
+export const GetPlayerOptions = async (
+  username?: string,
+  url?: string
+): Promise<PlayerOptions | undefined> => {
+  if (!url || !username) {
+    console.error(new Error('url for getting player options is incorrect'));
+    return;
+  }
 
   return axios
     .get<string>(url, {
       headers: {
-        ...GetAdditionalHeaders()
+        ...GetAdditionalHeaders(username)
       }
     })
     .then(response => {
@@ -46,7 +52,7 @@ export const GetAppConfig = (username: string): Promise<AppConfig> => {
   return axios
     .get<any>(`${LIVE_SERVER_HOME_URL}${username}`, {
       headers: {
-        ...GetAdditionalHeaders()
+        ...GetAdditionalHeaders(username)
       }
     })
     .then(response => {
@@ -62,7 +68,7 @@ export const GetLastMessages = async (
   return axios
     .get<ChatResponse>(`${LIVE_SERVER_API_URL}/blog/${username}/public_video_stream/chat`, {
       headers: {
-        ...GetAdditionalHeaders()
+        ...GetAdditionalHeaders(username)
       },
       params: {
         limit: limit
