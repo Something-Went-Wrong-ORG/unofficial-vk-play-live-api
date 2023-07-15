@@ -21,7 +21,8 @@ npm install
 
 ### Features
 
-- TBD
+- Get Last Messages from Stream (see [requesting](#)/[converting](#))
+- Get Messages using WebSockets (TBD, [right now authorisation not working properly here](#))
 
 ### Importing library
 
@@ -47,3 +48,63 @@ import something from 'unofficial-vk-play-live-api/dist/lib/something';
 - `npm run lint`: Lints code
 - `npm run commit`: Commit using conventional commit style ([husky](https://github.com/typicode/husky) will tell you to use it if you haven't :wink:)
 
+### Examples
+
+#### Get Last Messages from Stream
+
+```js
+// Import API
+const VKPAPI = require('unofficial-vk-play-live-api');
+
+try {
+  // Create instance of Stream Manager
+  const streamManager = VKPAPI.GetStreamManager('<channel_id>');
+  // Get last messages from stream chat
+  const messages = await streamManager.GetLastMessages(100);
+} catch (error) {
+  // Handle errors
+  console.error(error);
+}
+```
+
+#### Convert messages for your system
+
+```js
+// Import API
+const VKPAPI = require('unofficial-vk-play-live-api');
+
+try {
+  // Create instance of Stream Manager
+  const streamManager = VKPAPI.GetStreamManager('<channel_id>');
+  // Get last messages from stream chat
+  const messages = await streamManager.GetLastMessages(100);
+
+  // Convert messages
+  const result = messages.data.map((message) => {
+    const name = message.author.displayName;
+    const time = message.createdAt * 1000;
+
+    return {
+      time,
+      // Messages comes from VK Play Live comes as parts you can
+      // convert it to something that can be more useful for your app
+      message: message.data
+        .map((messagePart) => {
+          switch (messagePart.type) {
+            case 'text':
+              return messagePart.content[0];
+            case 'smile':
+              return `<img src="${messagePart.smallUrl}" />`;
+            case 'mention':
+              return `<strong>@${messagePart.displayName}</strong>`;
+          }
+        })
+        .join(''),
+      name,
+      id: `${name}-${time}`
+    };
+  });
+} catch (error) {
+  console.error(error);
+}
+```
