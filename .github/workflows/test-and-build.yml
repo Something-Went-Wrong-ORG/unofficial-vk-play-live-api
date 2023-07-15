@@ -3,7 +3,7 @@ run-name: Autotest and build performed by ${{ github.actor }}
 on: [push]
 jobs:
   prepare-test-build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
