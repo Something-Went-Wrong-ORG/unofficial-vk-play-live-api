@@ -2,27 +2,44 @@
 
 This library is unofficial API (for https://vkplay.live/) and uses undocumented features, so there is no guarantee that it will be fully functional after some time.
 
-Everything here is reverse engineered.
+It can be used in JavaScript/TypeScript projects.
 
+Everything here is reverse engineered:
 - If I can do something in browser, then this MUST be available through an API
 - If I can do something anonymously (without account) then I don't need some_sort of API key or another type of access
 
-### Usage
-
-```bash
-git clone https://github.com/Something-Went-Wrong-ORG/unofficial-vk-play-live-api.git YOURFOLDERNAME
-cd YOURFOLDERNAME
-
-# Run npm install. That's all!
-npm install
-```
-
-**Start coding!** `package.json` and entry files are already set up for you, so don't worry about linking to your main file, typings, etc. Just keep those files with the same name.
-
 ### Features
 
-- Get Last Messages from Stream (see [requesting](#)/[converting](#))
-- Get Messages using WebSockets (TBD, [right now authorisation not working properly here](#))
+- Get Video Player settings (P2P params, Live Chat info, Live Stream Info, Autoplay Options, Player Options, etc. [example](#get-metadata-or-player-options-from-stream-manager))
+- Get Last Messages from Stream (see [requesting](#get-last-messages-from-stream)/[converting](#convert-messages-for-your-system))
+- Get Messages using WebSockets (TBD, [right now authorisation not working properly here](https://github.com/Something-Went-Wrong-ORG/unofficial-vk-play-live-api/blob/54562b92580e5589c07b717ed7ff5989db2c3a2b/src/services/websocket.service.ts#L15))
+- TBD...
+
+### Installation
+
+Right now library is not available in NPM, but will be in future after testing
+
+So you can install it using local link to module:
+```bash
+# clone this repository
+git clone https://github.com/Something-Went-Wrong-ORG/unofficial-vk-play-live-api.git
+# go to js/ts library root
+cd unofficial-vk-play-live-api
+npm install
+npm run build
+```
+
+Then link it to your project by adding new [local dependency](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#local-paths) to your project `package.json`
+
+```json
+{
+  ...
+  "dependencies": {
+    ...
+    "unofficial-vk-play-live-api": "file:../unofficial-vk-play-live-api"
+  }
+}
+```
 
 ### Importing library
 
@@ -104,6 +121,23 @@ try {
       id: `${name}-${time}`
     };
   });
+} catch (error) {
+  console.error(error);
+}
+```
+
+#### Get Metadata or Player Options from Stream Manager
+
+```js
+const VKPAPI = require('unofficial-vk-play-live-api');
+
+try {
+  // Create instance of Stream Manager
+  const streamManager = VKPAPI.GetStreamManager('<channel_id>');
+  // Get stream metadata
+  const metadata = await streamManager.GetMetadata();
+  // Get player options
+  const playerOptions = await streamManager.GetPlayerOptions();
 } catch (error) {
   console.error(error);
 }
