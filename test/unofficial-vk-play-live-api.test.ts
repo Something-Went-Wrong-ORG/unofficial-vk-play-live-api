@@ -14,7 +14,7 @@ import VKPLAPI from '../src/unofficial-vk-play-live-api';
  * Dummy test
  */
 describe('Dummy test', () => {
-  const streamManager = VKPLAPI.GetStreamManager('terablade');
+  const streamManager = VKPLAPI.GetStreamManager('bezzdar');
 
   it('Root class is instantiable', () => {
     expect(new VKPLAPI()).toBeInstanceOf(VKPLAPI);
@@ -27,12 +27,13 @@ describe('Dummy test', () => {
     // expect(fieldsAreMatchingWithType(metadata, keyof<Metadata>)).toBeTruthy();
   });
 
-  it('PlayerOptions must come from server', async () => {
-    const playerOptions = await streamManager.GetPlayerOptions();
-    expect(playerOptions).not.toBeNull();
-    // todo: fix and enable check
-    // expect(fieldsAreMatchingWithType(playerOptions, PlayerOptions)).toBeTruthy();
-  });
+  // todo: looks like it is deprecated, need to check
+  // it('PlayerOptions must come from server', async () => {
+  //   const playerOptions = await streamManager.GetPlayerOptions();
+  //   expect(playerOptions).not.toBeNull();
+  //   // todo: fix and enable check
+  //   // expect(fieldsAreMatchingWithType(playerOptions, PlayerOptions)).toBeTruthy();
+  // });
 
   it('Chat messages must come from server', async () => {
     const playerOptions = await streamManager.GetLastMessages();

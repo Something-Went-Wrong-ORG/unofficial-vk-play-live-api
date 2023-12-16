@@ -20,33 +20,34 @@ export const GetMetadata = async (username: string, metadata?: Metadata): Promis
   );
 };
 
-export const GetPlayerOptions = async (
-  username?: string,
-  url?: string
-): Promise<PlayerOptions | undefined> => {
-  if (!url || !username) {
-    console.error(new Error('url for getting player options is incorrect'));
-    return;
-  }
-
-  return axios
-    .get<string>(url, {
-      headers: {
-        ...GetAdditionalHeaders(username)
-      }
-    })
-    .then(response => {
-      const regexp = /data-options="([^"]+)"/gm;
-      const result: any = JSON.parse(decode(regexp.exec(response.data)?.[1] ?? '{}'));
-
-      // hack for stringified vars
-      if (result?.flashvars?.metadata) {
-        result.flashvars.metadata = JSON.parse(result.flashvars.metadata);
-      }
-
-      return result;
-    });
-};
+// todo: looks like it is deprecated, need to check
+// export const GetPlayerOptions = async (
+//   username?: string,
+//   url?: string
+// ): Promise<PlayerOptions | undefined> => {
+//   if (!url || !username) {
+//     console.error(new Error('url for getting player options is incorrect'));
+//     return;
+//   }
+//
+//   return axios
+//     .get<string>(url, {
+//       headers: {
+//         ...GetAdditionalHeaders(username)
+//       }
+//     })
+//     .then(response => {
+//       const regexp = /data-options="([^"]+)"/gm;
+//       const result: any = JSON.parse(decode(regexp.exec(response.data)?.[1] ?? '{}'));
+//
+//       // hack for stringified vars
+//       if (result?.flashvars?.metadata) {
+//         result.flashvars.metadata = JSON.parse(result.flashvars.metadata);
+//       }
+//
+//       return result;
+//     });
+// };
 
 export const GetAppConfig = (username: string): Promise<AppConfig> => {
   return axios

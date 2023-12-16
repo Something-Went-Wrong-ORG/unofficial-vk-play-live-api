@@ -6,7 +6,7 @@
 import { StreamManager } from './modules/stream/stream';
 
 export default class VKPLAPI {
-  public static GetStreamManager(username: string) {
-    return new StreamManager(username);
+  public static GetStreamManager(username: string, immediateStart: boolean = true) {
+    return new StreamManager(username, immediateStart);
   }
 }
