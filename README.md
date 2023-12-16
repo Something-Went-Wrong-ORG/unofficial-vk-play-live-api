@@ -130,7 +130,7 @@ try {
 }
 ```
 
-#### Get Metadata or Player Options from Stream Manager
+#### Get Metadata or Player Options from Stream Manager (deprecated)
 
 ```js
 const VKPAPI = require('unofficial-vk-play-live-api');
