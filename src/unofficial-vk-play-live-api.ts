@@ -1,7 +1,9 @@
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
 // import "core-js/fn/array.find"
-// ...
-// export * from './modules/stream/stream';
+export * from './types/chat.types';
+export * from './types/metadata.types';
+export * from './types/playeroptions.types';
+export * from './types/websocket.types';
 
 import { StreamManager } from './modules/stream/stream';
 

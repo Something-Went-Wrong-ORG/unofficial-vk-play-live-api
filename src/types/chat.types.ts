@@ -20,6 +20,9 @@ export interface MessagePart {
   modificator: MessagePartModificator;
   type: Type;
   content: [string, string, []] | string;
+  smallUrl?: string;
+  url?: string;
+  displayName?: string;
 }
 
 export enum MessagePartModificator {
@@ -28,7 +31,10 @@ export enum MessagePartModificator {
 }
 
 export enum Type {
-  Text = 'text'
+  Text = 'text',
+  Smile = 'smile',
+  Link = 'link',
+  Mention = 'mention'
 }
 
 export interface Extra {
