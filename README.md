@@ -107,8 +107,8 @@ try {
 
     return {
       time,
-      // Messages comes from VK Play Live comes as parts you can
-      // convert it to something that can be more useful for your app
+      // Messages comes from VK Play Live as parts. you can convert it
+      // to something that can be more useful for your app
       message: message.data
         .map((messagePart) => {
           switch (messagePart.type) {
