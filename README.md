@@ -118,6 +118,10 @@ try {
               return `<img src="${messagePart.smallUrl}" />`;
             case 'mention':
               return `<strong>@${messagePart.displayName}</strong>`;
+            case 'link':
+              return `<a href="${messagePart.url}">${messagePart.content[0]}</a>`;
+            default:
+              return '';
           }
         })
         .join(''),
